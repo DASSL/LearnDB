@@ -1,5 +1,5 @@
 /**
- * error-config.js - LearnDB
+ * main-config.js - LearnDB
  *
  * Kevin Kelly
  * Data Science & Systems Lab (DASSL)
