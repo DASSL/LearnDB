@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "DASSL",
-  "license": "ISC",
+  "license": "CC 4.0 BY-SA-NC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
