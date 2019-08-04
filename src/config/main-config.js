@@ -11,11 +11,13 @@
  *
  * This file contains the server configuration related to error handling
  */
+
+
 (function (appConfig) {
   // *** main dependencies *** //
   const bodyParser = require('body-parser');
 
-  appConfig.init = function (app, express) {
+  appConfig.init = function (app) {
     app.set('view engine', 'html');
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));

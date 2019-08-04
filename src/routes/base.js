@@ -12,9 +12,9 @@
  * This file contains the basic routes and exports the router
  */
 
+
 const express = require('express');
 const router = express.Router();
-
 
 
 // Default route

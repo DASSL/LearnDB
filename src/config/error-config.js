@@ -11,6 +11,8 @@
  *
  * This file contains the server configuration related to error handling
  */
+
+
 (function (errorConfig) {
 
   'use strict';
@@ -26,6 +28,7 @@
       next(err);
     });
 
+
     // development error handler (will print stacktrace)
     if (app.get('env') === 'development') {
       app.use(function(err, req, res, next) {
@@ -36,6 +39,7 @@
       });
     }
 
+    
     // production error handler (no stacktraces leaked to user)
     app.use(function(err, req, res, next) {
       res.status(err.status || 500).send({
