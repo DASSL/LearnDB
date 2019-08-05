@@ -10,6 +10,9 @@
  * https://creativecommons.org/licenses/by-nc-sa/4.0/
  * 
  * PROVIDED AS IS. NO WARRANTIES EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+
+ * Field ordering and some style definitions are based on pgweb v0.11.3 for ease 
+ * of use. pgweb: https://github.com/sosedoff/pgweb/releases/tag/v0.11.3
  */
 
 .change-password {
