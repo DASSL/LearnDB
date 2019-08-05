@@ -1,0 +1,86 @@
+<!--
+  index.html - LearnDB
+
+  Kevin Kelly
+  Data Science & Systems Lab (DASSL)
+  https://dassl.github.io/
+  
+  (C) 2019- DASSL. ALL RIGHTS RESERVED.
+  Licensed to others under CC 4.0 BY-SA-NC
+  https://creativecommons.org/licenses/by-nc-sa/4.0/
+  
+  PROVIDED AS IS. NO WARRANTIES EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LearnDB</title>
+    <link rel="stylesheet" href="./css/index.css" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="change-password">
+        <div class="header">
+        <h1>LearnDB</h1>
+        </div>
+        <form role="form" class="form-horizontal" id="change_password_form">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Host</label>
+                <div class="col-sm-6">
+                    <input type="text" id="host" class="form-control" />
+                </div>
+                <div class="col-sm-2 no-left-padding">
+                    <input type="text" id="port" class="form-control" value="5432" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Username</label>
+                <div class="col-sm-8">
+                    <input type="text" id="username" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Current Password</label>
+                <div class="col-sm-8">
+                    <input type="password" id="currentPassword" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">New Password</label>
+                <div class="col-sm-8">
+                    <input type="password" id="newPassword" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Repeat New Password</label>
+                <div class="col-sm-8">
+                    <input type="password" id="repeatNewPassword" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Database</label>
+                <div class="col-sm-8">
+                    <input type="text" id="database" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                <button type="submit" class="btn btn-block btn-primary">Change Password</button>
+                </div>
+            </div>
+        </form> 
+    </div>
+</body>
