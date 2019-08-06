@@ -27,7 +27,7 @@ const app = express();
 
 
 // *** config *** //
-appConfig.init(app);
+appConfig.init(app, express);
 routeConfig.init(app);
 errorConfig.init(app);
 

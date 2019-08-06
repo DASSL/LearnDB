@@ -1,0 +1,36 @@
+/**
+ * index.css - LearnDB
+ *
+ * Kevin Kelly
+ * Data Science & Systems Lab (DASSL)
+ * https://dassl.github.io/
+ * 
+ * (C) 2019- DASSL. ALL RIGHTS RESERVED.
+ * Licensed to others under CC 4.0 BY-SA-NC
+ * https://creativecommons.org/licenses/by-nc-sa/4.0/
+ * 
+ * PROVIDED AS IS. NO WARRANTIES EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+
+ * Field ordering and some style definitions are based on pgweb v0.11.3 for ease 
+ * of use. pgweb: https://github.com/sosedoff/pgweb/releases/tag/v0.11.3
+ */
+
+.change-password {
+    width: 600px;
+    margin: 0px auto;
+    margin-top: 50px;
+}
+  
+.change-password .header h2 {
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 0px 1px 0px #fff;
+    color: #999;
+    font-weight: normal;
+}
+
+.change-password form {
+    background: #f6f6f6;
+    padding: 25px;
+    border-radius: 4px;
+}

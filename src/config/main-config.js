@@ -18,10 +18,14 @@
 (function (appConfig) {
   // *** main dependencies *** //
   const bodyParser = require('body-parser');
+  const path = require('path');
 
-  appConfig.init = function (app) {
+  appConfig.init = function (app, express) {
     app.set('view engine', 'html');
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
+
+    // Allow express server to serve static files from the client folder
+    app.use(express.static(path.join(__dirname, '..', 'client')));
   };
 }(module.exports));
