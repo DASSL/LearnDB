@@ -1,2 +1,2 @@
 # LearnDB
-Web front-end to Postgres DBMS
+A web front-end to Postgres databases
