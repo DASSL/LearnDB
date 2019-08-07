@@ -1,5 +1,5 @@
 /**
- * index.css - LearnDB
+ * index.js - LearnDB
  *
  * Kevin Kelly
  * Data Science & Systems Lab (DASSL)
@@ -17,40 +17,56 @@
 
 
 $(document).ready(function () {
-    $('form').submit(function (event) {
-        event.preventDefault();
-        //collect the form data using Id Selector what ever data you need to send to server
-        let host=$('#host').val();
-        let port= $('#port').val();
-        let database= $('#database').val();
-        let username=$('#username').val();
-        let currentPassword= $('#currentPassword').val();
-        let newPassword=$('#newPassword').val();
-        let confirmNewPassword=$('#confirmNewPassword').val();
+  $('form').submit(function (event) {
+    // Stop page reload on submit
+    event.preventDefault();
 
-        if (newPassword !== confirmNewPassword) {
-            alert('New Passwords do not match');
-            return;
-        }
+    let host=$('#host').val();
+    let port= $('#port').val();
+    let database= $('#database').val();
+    let username=$('#username').val();
+    let currentPassword= $('#currentPassword').val();
+    let newPassword=$('#newPassword').val();
+    let confirmNewPassword=$('#confirmNewPassword').val();
 
-        $.ajax({
-            url: './users/change-password',
-            data: JSON.stringify({
-                "host": host,
-                "port": port,
-                "database": database,
-                "username": username, 
-                "currentPassword": currentPassword,
-                "newPassword": newPassword,
-            }),
-            processData: false,
-            type: 'POST',
-            contentType: 'application/json',
-            success: function (data) {
-                alert(data);
-            }
-        });
+    if (newPassword !== confirmNewPassword) {
+      $("#alert").replaceWith(`
+        <div class="col-sm-12 alert alert-danger text-center" role="alert" id="failed">
+          <p><strong>New Passwords do not match</strong></p>
+        </div>
+      `);
+      return;
+    }
 
-
+    $.ajax({
+      url: './users/change-password',
+      data: JSON.stringify({
+        "host": host,
+        "port": port,
+        "database": database,
+        "username": username, 
+        "currentPassword": currentPassword,
+        "newPassword": newPassword,
+      }),
+      processData: false,
+      type: 'POST',
+      contentType: 'application/json',
+      success: function (res) {
+        $("#alert").replaceWith(`
+          <div class="col-sm-12 alert alert-success text-center" role="alert" id="alert">
+              <p><strong>${res.data}</strong></p>
+          </div>
+        `);
+      },
+      error: function (res) {
+        console.log(res);
+        $("#alert").replaceWith(`
+          <div class="col-sm-12 alert alert-danger text-center" role="alert" id="alert">
+              <p><strong>${res.responseJSON.message}</strong></p>
+          </div>
+        `);
+      }
     });
+
+  });
 })

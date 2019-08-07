@@ -25,7 +25,16 @@ const router = express.Router();
  * @param {string} port the port that unreal engine server should be opened on
  */
 router.post('/change-password', (req, res) => {
-    return res.status(200).json({status:"Getting to route"});
+  if (req.body.username === "error") {
+    return res.status(500).json({
+      status: "error",
+      message: "An error occurred"
+    }); 
+  }
+  return res.status(200).json({
+    status: "success",
+    data: "Got to route successfully"
+  });
 });
 
 
