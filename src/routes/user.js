@@ -20,9 +20,15 @@ const router = express.Router();
 
 
 /**
- *  This route is used to open an unreal server instance on a specific port
+ *  This route is currently configured to return successful unless the username
+ *   parameter is "error"
  *
- * @param {string} port the port that unreal engine server should be opened on
+ * @param {string} host is the PostgreSQL server domain/ip
+ * @param {string} port is the PostgreSQL server port
+ * @param {string} database is the database name user has access to
+ * @param {string} username is the user's ID
+ * @param {string} currentPassword is the user's current password to the database
+ * @param {string} newPassword is the password user wants to switch to
  */
 router.post('/change-password', (req, res) => {
   if (req.body.username === "error") {
