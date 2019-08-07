@@ -1,5 +1,5 @@
 /**
- * base.js - LearnDB
+ * user.js - LearnDB
  *
  * Kevin Kelly
  * Data Science & Systems Lab (DASSL)
