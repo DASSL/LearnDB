@@ -5,7 +5,7 @@ A web front-end to Postgres databases
 LearnDB is run on a Node.JS express web server(tested with LTS Version 10.16.2). To install Node.js and run LearnDB, follow these steps:
 
 1) Install [Node.js with npm](https://nodejs.org/en/download/). Use the installer defaults.
-2) Open a shell as administrator
+2) Open a command window as administrator
 3) Navigate to the `src` directory and type `npm install`
 4) Next type `npm start`
 
