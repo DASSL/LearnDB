@@ -1,5 +1,5 @@
 /**
- * user.js - LearnDB
+ * users.js - LearnDB
  *
  * Kevin Kelly
  * Data Science & Systems Lab (DASSL)
@@ -11,7 +11,7 @@
  * 
  * PROVIDED AS IS. NO WARRANTIES EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
  *
- * This file contains the user routes and exports the router
+ * This file contains the users routes and exports the router
  */
 
 
