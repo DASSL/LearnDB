@@ -32,7 +32,7 @@ $(document).ready(function () {
     if (newPassword !== confirmNewPassword) {
       $("#alert").replaceWith(`
         <div class="col-sm-12 alert alert-danger text-center" role="alert" id="failed">
-          <p><strong>New Passwords do not match</strong></p>
+          <p><strong>The new password and its confirmation do not match</strong></p>
         </div>
       `);
       return;
