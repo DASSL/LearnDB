@@ -32,6 +32,6 @@ const pgp = require('pg-promise')({
 module.exports = function ({username, password, host = "localhost",
                             port = "5432",  database }) {
     const connectionString = `postgresql://${username}:${password}`
-                           + `@${host}:${port}/${database}&application_name=LearnDB`;
+                           + `@${host}:${port}/${database}?application_name=LearnDB`;
     return db = pgp(connectionString);
 };
