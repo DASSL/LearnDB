@@ -1,5 +1,5 @@
 {
-  "name": "LearnDB",
+  "name": "learndb",
   "version": "0.0.1",
   "description": "A web front-end to PostgreSQL databases",
   "main": "app.js",
