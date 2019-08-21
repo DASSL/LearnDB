@@ -47,6 +47,7 @@ $(document).ready(function () {
         "username": username, 
         "currentPassword": currentPassword,
         "newPassword": newPassword,
+        "confirmNewPassword": confirmNewPassword,
       }),
       processData: false,
       type: 'POST',
@@ -59,7 +60,6 @@ $(document).ready(function () {
         `);
       },
       error: function (res) {
-        console.log(res);
         $("#alert").replaceWith(`
           <div class="col-sm-12 alert alert-danger text-center" role="alert" id="alert">
               <p><strong>${res.responseJSON.message}</strong></p>

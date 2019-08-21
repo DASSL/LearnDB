@@ -30,8 +30,15 @@ const dbConnectionCreator = require('../db/db.js');
  * @param {string} username is the user's ID
  * @param {string} currentPassword is the user's current password to the database
  * @param {string} newPassword is the password user wants to switch to
+ * @param {string} confirmNewPassword is the password user wants to switch to
  */
 router.post('/change-password', (req, res) => {
+  if (req.body.newPassword !== req.body.confirmNewPassword) {
+    return res.status(500).json({
+      status: "error",
+      message: "The new password and its confirmation do not match"
+    }); 
+  }
   const db = dbConnectionCreator({username: req.body.username,
                                   password: req.body.currentPassword,
                                   host: req.body.host,
