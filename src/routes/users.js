@@ -17,6 +17,7 @@
 
 const express = require('express');
 const router = express.Router();
+const dbConnectionCreator = require('../db/db.js');
 
 
 /**
@@ -31,16 +32,28 @@ const router = express.Router();
  * @param {string} newPassword is the password user wants to switch to
  */
 router.post('/change-password', (req, res) => {
-  if (req.body.username === "error") {
-    return res.status(500).json({
-      status: "error",
-      message: "An error occurred"
-    }); 
-  }
-  return res.status(200).json({
-    status: "success",
-    data: "Got to route successfully"
-  });
+  const db = dbConnectionCreator({username: req.body.username,
+                                  password: req.body.currentPassword,
+                                  host: req.body.host,
+                                  port: req.body.port,
+                                  database: req.body.database});
+  db.any(`ALTER USER ${req.body.username} WITH ENCRYPTED PASSWORD ` +
+         `'${req.body.newPassword}';`)
+    .then(() => {
+      return res.status(200).json({
+        status: "success",
+        data: "Changed password successfully"
+      }); 
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        status: "error",
+        message: "An error occurred"
+      }); 
+    })
+    .finally(() => {
+      db.$pool.end();// explicity close db connection
+    });
 });
 
 
