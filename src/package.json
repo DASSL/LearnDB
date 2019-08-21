@@ -12,7 +12,7 @@
     "url": "git://github.com/DASSL/LearnDB.git",
     "private": true
   },
-  "author": "DASSL",
+  "author": "Data Science & Systems Lab (DASSL)",
   "license": "CC-BY-NC-4.0",
   "dependencies": {
     "body-parser": "^1.19.0",
