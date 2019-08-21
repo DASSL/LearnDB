@@ -16,10 +16,12 @@
 (function (routeConfig) {
   routeConfig.init = function (app) {
     // *** routes *** //
-    const routes = require('../routes/base');
+    const baseRoutes = require('../routes/base.js');
+    const usersRoutes = require('../routes/users.js');
 
     // *** register routes *** //
-    app.use('/', routes);
+    app.use('/', baseRoutes);
+    app.use('/users', usersRoutes);
 
   };
 }(module.exports));
