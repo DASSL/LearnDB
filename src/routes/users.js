@@ -42,7 +42,7 @@ router.post('/change-password', (req, res) => {
     .then(() => {
       return res.status(200).json({
         status: "success",
-        data: "Changed password successfully"
+        data: "Password changed successfully"
       }); 
     })
     .catch((error) => {
