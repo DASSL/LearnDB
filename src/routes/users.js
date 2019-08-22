@@ -33,7 +33,7 @@ const dbConnectionCreator = require('../db/db.js');
  * @param {string} confirmNewPassword is the password user wants to switch to
  */
 router.post('/change-password', (req, res) => {
-  if (typeof req.body.username !== 'string' || req.body.username.length < 1) {
+  if (typeof req.body.username !== 'string' || req.body.username.trim().length < 1) {
     return res.status(500).json({
       status: "error",
       message: "Username field was left empty"
@@ -46,7 +46,7 @@ router.post('/change-password', (req, res) => {
       message: "The new password and its confirmation do not match"
     }); 
   }
-  
+
   const db = dbConnectionCreator({username: req.body.username,
                                   password: req.body.currentPassword,
                                   host: req.body.host,
