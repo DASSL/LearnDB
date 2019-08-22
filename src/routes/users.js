@@ -33,27 +33,35 @@ const dbConnectionCreator = require('../db/db.js');
  * @param {string} confirmNewPassword is the password user wants to switch to
  */
 router.post('/change-password', (req, res) => {
-  if (typeof req.body.username !== 'string' || req.body.username.trim().length < 1) {
+  let host = req.body.host.trim()
+  if (typeof req.body.port === 'string') port = req.body.port.trim(); 
+  let database = req.body.database.trim()
+  let username = req.body.username.trim()
+  let currentPassword = req.body.currentPassword.trim()
+  let newPassword = req.body.newPassword.trim()
+  let confirmNewPassword = req.body.confirmNewPassword.trim()
+
+  if (username.length < 1) {
     return res.status(500).json({
       status: "error",
       message: "Username field was left empty"
     }); 
   }
 
-  if (req.body.newPassword !== req.body.confirmNewPassword) {
+  if (newPassword !== confirmNewPassword) {
     return res.status(500).json({
       status: "error",
       message: "The new password and its confirmation do not match"
     }); 
   }
 
-  const db = dbConnectionCreator({username: req.body.username,
-                                  password: req.body.currentPassword,
-                                  host: req.body.host,
-                                  port: req.body.port,
-                                  database: req.body.database});
-  db.any(`ALTER USER ${req.body.username} WITH ENCRYPTED PASSWORD ` +
-         `'${req.body.newPassword}';`)
+  const db = dbConnectionCreator({username: username,
+                                  password: currentPassword,
+                                  host: host,
+                                  port: port,
+                                  database: database});
+  db.any(`ALTER USER ${username} WITH ENCRYPTED PASSWORD ` +
+         `'${newPassword}';`)
     .then(() => {
       return res.status(200).json({
         status: "success",
