@@ -33,7 +33,7 @@ const dbConnectionCreator = require('../db/db.js');
  * @param {string} confirmNewPassword is the password user wants to switch to
  */
 router.post('/change-password', (req, res) => {
-  let host = (req.body.host + '').trim()
+  let host = (req.body.host + '').trim();
   let port = (req.body.port + '').trim(); 
   let database = (req.body.database + '').trim()
   let username = (req.body.username + '').trim()
