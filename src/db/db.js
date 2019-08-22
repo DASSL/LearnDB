@@ -20,18 +20,19 @@ const pgp = require('pg-promise')({
 });
 
 /**
- * Exporting a function that will create a database connection
+ * Exporting a function that will create a database connection. If host and port
+ *  parameters are left empty they will use the database server's default values. 
+ *  More information on how those defaults are set can be found here: 
+ *  https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNSTRING
  *
  * @param {string} username The username of user to connecting to database
  * @param {string} password The password associated with the database role
  * @param {string} host The host server domain
  * @param {string} port The host server port
  * @param {string} database The database
- *
  */
-module.exports = function ({username, password, host = "localhost",
-                            port = "5432",  database }) {
+module.exports = function ({username, password, host,port,  database }) {
     const connectionString = `postgresql://${username}:${password}`
-                           + `@${host}:${port}/${database}?application_name=LearnDB`;
+                           + `@${host}:${port}/${database}?application_name=LearnDB`;                       
     return db = pgp(connectionString);
 };
