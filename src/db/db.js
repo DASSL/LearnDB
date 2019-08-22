@@ -20,7 +20,7 @@ const pgp = require('pg-promise')({
 });
 
 /**
- * Exporting a function that will create a database connection. If host and port
+ * Exporting a function that will create a database connection. If any of the parameters
  *  parameters are left empty they will use the database server's default values. 
  *  More information on how those defaults are set can be found here: 
  *  https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNSTRING
