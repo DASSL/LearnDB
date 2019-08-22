@@ -33,13 +33,13 @@ const dbConnectionCreator = require('../db/db.js');
  * @param {string} confirmNewPassword is the password user wants to switch to
  */
 router.post('/change-password', (req, res) => {
-  let host = req.body.host.trim()
-  if (typeof req.body.port === 'string') port = req.body.port.trim(); 
-  let database = req.body.database.trim()
-  let username = req.body.username.trim()
-  let currentPassword = req.body.currentPassword.trim()
-  let newPassword = req.body.newPassword.trim()
-  let confirmNewPassword = req.body.confirmNewPassword.trim()
+  let host = (req.body.host + '').trim()
+  let port = (req.body.port + '').trim(); 
+  let database = (req.body.database + '').trim()
+  let username = (req.body.username + '').trim()
+  let currentPassword = (req.body.currentPassword + '').trim()
+  let newPassword = (req.body.newPassword + '').trim()
+  let confirmNewPassword = (req.body.confirmNewPassword + '').trim()
 
   if (username.length < 1) {
     return res.status(500).json({
@@ -48,10 +48,17 @@ router.post('/change-password', (req, res) => {
     }); 
   }
 
+  if (newPassword.length < 1) {
+    return res.status(500).json({
+      status: "error",
+      message: "New password is required"
+    }); 
+  }
+
   if (newPassword !== confirmNewPassword) {
     return res.status(500).json({
       status: "error",
-      message: "The new password and its confirmation do not match"
+      message: "The new password and its confirmation must match"
     }); 
   }
 
