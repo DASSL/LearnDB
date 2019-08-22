@@ -36,7 +36,7 @@ router.post('/change-password', (req, res) => {
   if (typeof req.body.username !== 'string' || req.body.username.trim().length < 1) {
     return res.status(500).json({
       status: "error",
-      message: "Username field was left empty"
+      message: "Username is required"
     }); 
   }
 
