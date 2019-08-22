@@ -37,9 +37,9 @@ router.post('/change-password', (req, res) => {
   let port = (req.body.port + '').trim(); 
   let database = (req.body.database + '').trim();
   let username = (req.body.username + '').trim();
-  let currentPassword = (req.body.currentPassword + '').trim()
-  let newPassword = (req.body.newPassword + '').trim()
-  let confirmNewPassword = (req.body.confirmNewPassword + '').trim()
+  let currentPassword = (req.body.currentPassword + '').trim();
+  let newPassword = (req.body.newPassword + '').trim();
+  let confirmNewPassword = (req.body.confirmNewPassword + '').trim();
 
   if (username.length < 1) {
     return res.status(500).json({
