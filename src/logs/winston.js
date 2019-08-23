@@ -24,7 +24,6 @@ const {
 const myFormat = printf(info => `${info.timestamp} ${info.level}: ${info.message}`);
 
 const logger = createLogger({
-  level: 'info',
   format: combine(
     timestamp(),
     myFormat,
