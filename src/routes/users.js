@@ -18,6 +18,7 @@
 const express = require('express');
 const router = express.Router();
 const dbConnectionCreator = require('../db/db.js');
+const logger = require('../logs/winston.js');
 
 
 /**
@@ -41,7 +42,10 @@ router.post('/change-password', (req, res) => {
   let newPassword = (req.body.newPassword + '').trim();
   let confirmNewPassword = (req.body.confirmNewPassword + '').trim();
 
+  logger.info(`(Change-Password) User: ${username} attempting to change password`);
+
   if (username.length < 1) {
+    logger.info(`(Change-Password) User: ${username} did not provide username`);
     return res.status(500).json({
       status: "error",
       message: "Username is required"
@@ -49,6 +53,7 @@ router.post('/change-password', (req, res) => {
   }
 
   if (newPassword.length < 1) {
+    logger.info(`(Change-Password) User: ${username} did not provide new password`);
     return res.status(500).json({
       status: "error",
       message: "New password is required"
@@ -56,6 +61,7 @@ router.post('/change-password', (req, res) => {
   }
 
   if (newPassword !== confirmNewPassword) {
+    logger.info(`(Change-Password) User: ${username} did have matching new passwords`);
     return res.status(500).json({
       status: "error",
       message: "The new password and its confirmation must match"
@@ -70,12 +76,14 @@ router.post('/change-password', (req, res) => {
   db.any(`ALTER USER ${username} WITH ENCRYPTED PASSWORD ` +
          `'${newPassword}';`)
     .then(() => {
+      logger.info(`(Change-Password) User: ${username} successfully changed password`);
       return res.status(200).json({
         status: "success",
         data: "Password changed successfully"
       }); 
     })
     .catch((error) => {
+      logger.error(`(Change-Password) User: ${username} could not change password because server error`);
       return res.status(500).json({
         status: "error",
         message: "An error occurred"
