@@ -83,11 +83,38 @@ router.post('/change-password', (req, res) => {
       }); 
     })
     .catch((error) => {
-      logger.error(`(Change-Password) User: ${username} could not change password because server error`);
+      switch (error.code) {
+        case 'ETIMEDOUT':
+        case 'ENOTFOUND':
+        case 'ECONNREFUSED':
+          logMessage = "was unable to connect to host";
+          responseMessage = "Unable to connect to host";
+          break;
+        case '28P01':
+          logMessage = "supplied incorrect username or password";
+          responseMessage = "Username or password is incorrect";
+          break;
+        case '3D000':
+          logMessage = "supplied database that does not exist";
+          responseMessage = "Database does not exist";
+          break;
+        case '42501':
+          logMessage = "supplied database that user does not have permission on";
+          responseMessage = `You do not have connect permission on database ${database}`;
+          break;
+        default:
+          logger.error(`(Change-Password) User: ${username} could not change password because server error`);
+          return res.status(500).json({
+            status: "error",
+            message: "An error occurred"
+          });
+      }
+
+      logger.info(`(Change-Password) User: ${username} ${logMessage}`);
       return res.status(500).json({
         status: "error",
-        message: "An error occurred"
-      }); 
+        message: responseMessage
+      });
     })
     .finally(() => {
       db.$pool.end();// explicity close db connection
