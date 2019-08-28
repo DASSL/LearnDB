@@ -29,8 +29,8 @@ const logger = createLogger({
     myFormat,
   ),
   transports: [
-    new transports.File({ filename: 'logs/error.log', level: 'error' }),
-    new transports.File({ filename: 'logs/combined.log' }),
+    new transports.File({ filename: `${process.env.PATH_TO_LOGS}/error.log`, level: 'error' }),
+    new transports.File({ filename: `${process.env.PATH_TO_LOGS}/combined.log` }),
   ],
 });
 

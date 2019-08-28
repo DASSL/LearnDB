@@ -18,7 +18,7 @@
 const express = require('express');
 const router = express.Router();
 const dbConnectionCreator = require('../db/db.js');
-const logger = require('../logs/winston.js');
+const logger = require('../helpers/winston.js.js');
 
 
 /**
