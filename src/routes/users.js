@@ -61,7 +61,7 @@ router.post('/change-password', (req, res) => {
   }
 
   if (newPassword !== confirmNewPassword) {
-    logger.info(`(Change-Password) User: ${username} did have matching new passwords`);
+    logger.info(`(Change-Password) User: ${username} new password and its confirmation did not match`);
     return res.status(500).json({
       status: "error",
       message: "The new password and its confirmation must match"
