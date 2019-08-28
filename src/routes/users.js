@@ -83,6 +83,9 @@ router.post('/change-password', (req, res) => {
       }); 
     })
     .catch((error) => {
+      // Error codes for the following switch statement can be found here:
+      //  https://www.postgresql.org/docs/10/errcodes-appendix.html and
+      //  https://nodejs.org/api/errors.html 
       switch (error.code) {
         case 'ETIMEDOUT':
         case 'ENOTFOUND':
