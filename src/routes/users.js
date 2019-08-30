@@ -18,6 +18,7 @@
 const express = require('express');
 const router = express.Router();
 const dbConnectionCreator = require('../db/db.js');
+const logger = require('../helpers/winston.js');
 
 
 /**
@@ -41,7 +42,10 @@ router.post('/change-password', (req, res) => {
   let newPassword = (req.body.newPassword + '').trim();
   let confirmNewPassword = (req.body.confirmNewPassword + '').trim();
 
+  logger.info(`(Change-Password) User: ${username} attempting to change password`);
+
   if (username.length < 1) {
+    logger.info(`(Change-Password) User: ${username} did not provide username`);
     return res.status(500).json({
       status: "error",
       message: "Username is required"
@@ -49,6 +53,7 @@ router.post('/change-password', (req, res) => {
   }
 
   if (newPassword.length < 1) {
+    logger.info(`(Change-Password) User: ${username} did not provide new password`);
     return res.status(500).json({
       status: "error",
       message: "New password is required"
@@ -56,6 +61,7 @@ router.post('/change-password', (req, res) => {
   }
 
   if (newPassword !== confirmNewPassword) {
+    logger.info(`(Change-Password) User: ${username} new password and its confirmation did not match`);
     return res.status(500).json({
       status: "error",
       message: "The new password and its confirmation must match"
@@ -70,16 +76,48 @@ router.post('/change-password', (req, res) => {
   db.any(`ALTER USER ${username} WITH ENCRYPTED PASSWORD ` +
          `'${newPassword}';`)
     .then(() => {
+      logger.info(`(Change-Password) User: ${username} successfully changed password`);
       return res.status(200).json({
         status: "success",
         data: "Password changed successfully"
       }); 
     })
     .catch((error) => {
+      // Error codes for the following switch statement can be found here:
+      //  https://www.postgresql.org/docs/10/errcodes-appendix.html and
+      //  https://nodejs.org/api/errors.html 
+      switch (error.code) {
+        case 'ETIMEDOUT':
+        case 'ENOTFOUND':
+        case 'ECONNREFUSED':
+          logMessage = ` was unable to connect to host '${host}'`;
+          responseMessage = `Unable to connect to host '${host}'`;
+          break;
+        case '28P01':
+          logMessage = "supplied incorrect username or password";
+          responseMessage = "Username or password is incorrect";
+          break;
+        case '3D000':
+          logMessage = `supplied database ${database} that does not exist`;
+          responseMessage = "Database does not exist";
+          break;
+        case '42501':
+          logMessage = `does not have connect permission on database '${database}'`;
+          responseMessage = `You do not have connect permission on database '${database}'`;
+          break;
+        default:
+          logger.error(`(Change-Password) User '${username}' could not change password because server error`);
+          return res.status(500).json({
+            status: "error",
+            message: "An error occurred"
+          });
+      }
+
+      logger.info(`(Change-Password) User '${username}' ${logMessage}`);
       return res.status(500).json({
         status: "error",
-        message: "An error occurred"
-      }); 
+        message: responseMessage
+      });
     })
     .finally(() => {
       db.$pool.end();// explicity close db connection

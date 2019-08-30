@@ -19,6 +19,8 @@
   // *** main dependencies *** //
   const bodyParser = require('body-parser');
   const path = require('path');
+  
+  require('dotenv').config();
 
   appConfig.init = function (app, express) {
     app.set('view engine', 'html');
