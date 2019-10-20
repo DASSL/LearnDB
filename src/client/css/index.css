@@ -29,6 +29,14 @@
     font-weight: normal;
 }
 
+.version {
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 0px 1px 0px #fff;
+    color: #999;
+    font-weight: normal;
+}
+
 .change-password form {
     background: #f6f6f6;
     padding: 25px;
