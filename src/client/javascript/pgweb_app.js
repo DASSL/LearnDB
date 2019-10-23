@@ -573,6 +573,7 @@ function showConnectionPanel() {
 
 function showAboutPanel() {
   setCurrentTab("table_about");
+	//add document.getElementById("input").style = 'display: none'
   document.getElementById("output").innerHTML = '<div class="wrapper"> <table id="results" class="table"><thead id="results_header"><th class="table-header-col" data-name="attribute">About</th><th class="table-header-col" data-name="value"></th></thead><tbody id="results_body"><tr><td data-col="0">LearnDB is a Graphical User Interface for interaction with PostgrSQL and ClassDB. The current implementaion depends on pgweb.</td></tr></tbody></div>';
 }
 
