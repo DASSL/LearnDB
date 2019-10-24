@@ -67,7 +67,7 @@
                 <match filterByTags="None" pattern="&lt;button type=&quot;button&quot; id=&quot;close_connection_window&quot; class=&quot;btn btn-block btn-default&quot;>Cancel&lt;/button>" />
                 <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
                 </conditions>
-                <action type="Rewrite" value="&lt;button type=&quot;button&quot; id=&quot;close_connection_window&quot; class=&quot;btn btn-block btn-default&quot;>Cancel&lt;/button>&lt;/div>&lt;div class=&quot;col-sm-12&quot; name=&quot;divChangePasswd&quot;>&lt;p class=&quot;help-block&quot;>&lt;a href=&quot;http://localhost:5000&quot;>Change Password&lt;/a>&lt;/p>" />
+                <action type="Rewrite" value="&lt;button type=&quot;button&quot; id=&quot;close_connection_window&quot; class=&quot;btn btn-block btn-default&quot;>Cancel&lt;/button>&lt;/div>&lt;div style=&quot;text-align:center;&quot; class=&quot;col-sm-12&quot; name=&quot;divChangePasswd&quot;>&lt;p class=&quot;help-block&quot;>&lt;a href=&quot;http://localhost:5000&quot;>Change Password&lt;/a>&lt;/p>" />
             </rule>
             <rule name="Add Tab After Connections">
                 <match pattern="&lt;li id=&quot;table_connection&quot;>Connection&lt;/li>" />
