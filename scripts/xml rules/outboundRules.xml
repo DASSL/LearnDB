@@ -22,10 +22,10 @@
                 <action type="Rewrite" value="&lt;title>LearnDB&lt;/title>" />
             </rule>
             <rule name="Change Heading">
-                <match pattern="&lt;h1>pgweb&lt;/h1>" />
+                <match filterByTags="None" pattern="&lt;h1>pgweb&lt;/h1>" />
                 <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
                 </conditions>
-                <action type="Rewrite" value="&lt;h1>LearnDB&lt;/h1>" />
+                <action type="Rewrite" value="&lt;h2 style=&quot;text-align: center;text-shadow: 0px 1px 0px #fff;color: #999;font-weight: normal;&quot;>LearnDB&lt;/h2>" />
             </rule>
             <rule name="Change Username Label to Database">
                 <match filterByTags="None" pattern="&lt;label class=&quot;col-sm-3 control-label&quot;>Username&lt;/label>" />
