@@ -75,17 +75,17 @@
                 </conditions>
                 <action type="Rewrite" value="&lt;li id=&quot;table_connection&quot;>Connection&lt;/li>&lt;li id=&quot;table_about&quot; onclick=&quot;loadAbout();&quot;>About&lt;/li>" />
             </rule>
-            <rule name="Changer version of pgweb to (&quot;Based on pgweb&quot; + versionNumber)">
-                <match filterByTags="None" pattern="&lt;div class=&quot;version&quot;>&lt;/div>" />
-                <conditions>
-                </conditions>
-                <action type="Rewrite" value="&lt;div class=&quot;header&quot; style=&quot;font-size: 12px;  color: #aaa;  display: flex; align-items: center; justify-content: center;&quot;>(Based on &lt;a href=&quot;https://github.com/sosedoff/&quot;> &amp;nbsp pgweb &amp;nbsp&lt;/a>&lt;div class=&quot;version&quot;>&lt;/div>)&lt;/div>" />
-            </rule>
             <rule name="Insert loadAbout() script before &lt;/head>" patternSyntax="ExactMatch">
                 <match filterByTags="None" pattern="&lt;/head>" />
                 <conditions>
                 </conditions>
                 <action type="Rewrite" value="&lt;script type=&quot;text/javascript&quot;>function loadAbout() {UrlDecode:%7B}  $(&quot;#input&quot;).hide(); $(&quot;#body&quot;).addClass(&quot;full&quot;); setCurrentTab(&quot;table_about&quot;); document.getElementById(&quot;output&quot;).innerHTML = '&lt;div class=&quot;wrapper&quot;> &lt;table id=&quot;results&quot; class=&quot;table&quot;>&lt;thead id=&quot;results_header&quot;>&lt;th class=&quot;table-header-col&quot; data-name=&quot;attribute&quot;>About&lt;/th>&lt;th class=&quot;table-header-col&quot; data-name=&quot;value&quot;>&lt;/th>&lt;/thead>&lt;tbody id=&quot;results_body&quot;>&lt;tr>&lt;td data-col=&quot;0&quot;>LearnDB is a Graphical User Interface for interaction with PostgrSQL and ClassDB. The current implementaion depends on pgweb.&lt;/td>&lt;/tr>&lt;/tbody>&lt;/div>';{UrlDecode:%7D}&lt;/script>&lt;/head>" />
+            </rule>
+            <rule name="Changer version of pgweb to (&quot;Based on pgweb&quot; + versionNumber)">
+                <match filterByTags="None" pattern="&lt;div class=&quot;version&quot;>&lt;/div>" negate="true" />
+                <conditions>
+                </conditions>
+                <action type="Rewrite" value="&lt;span class=&quot;header&quot; style=&quot;font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;&quot;>(Based on &lt;a href=&quot;https://github.com/sosedoff/&quot; target=&quot;_blank&quot;>&amp;nbsp;pgweb&amp;nbsp;&lt;/a>&lt;span class=&quot;version&quot;>&lt;/span>)&lt;/span>" />
             </rule>
         </system.webServer-rewrite-outboundRules>
     </CONFIG>
