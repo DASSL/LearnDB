@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appcmd>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/rules" path="MACHINE/WEBROOT/APPHOST/Default Web Site" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-rules>
+            <rule name="ReverseProxyInboundRule1" stopProcessing="false">
+                <match url="(.*)" />
+                <conditions>
+                </conditions>
+                <serverVariables>
+                </serverVariables>
+                <action type="Rewrite" url="http://localhost:8081/{R:1}" />
+            </rule>
+        </system.webServer-rewrite-rules>
+    </CONFIG>
+</appcmd>
