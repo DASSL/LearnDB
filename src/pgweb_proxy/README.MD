@@ -23,6 +23,11 @@
 ### Rule to do the URL Rewrite:
 
 # ARR Outbound Rules Implemented in LearnDB
+* For all rules implemented below, follow the following steps:
+  1. Add an outbound blank rule.
+  2. Add an appropriate title for the rule.
+  2. Set the "Pattern" field of the "Match" section to the HTML that should be replaced.
+  3. Set the "Value" field of the "Action" section to the HTML that should replace the previous HTML.
 ### Rules to Change the Title and Header of the page:
 * Change `<title>pgweb</title>` to `<title>LearnDB</title>`
 * Change `<h1>pgweb</h1>` to `<h1>LearnDB</h1>`
