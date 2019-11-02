@@ -24,8 +24,8 @@
 
 # ARR Outbound Rules Implemented in LearnDB
 ### Rules to Change the Title and Header of the page:
-* `<title>pgweb</title>` is changed to `<title>LearnDB</title>`
-* `<h1>pgweb</h1>` is changed to  `<h1>LearnDB</h1>`
+* Change `<title>pgweb</title>` to `<title>LearnDB</title>`
+* Change `<h1>pgweb</h1>` to `<h1>LearnDB</h1>`
 ### Rules to Reorganize the input boxes on the homepage:
 * Add an outbound blank rule titled "Change Username Label to Database"
   * Set the "Pattern" field of the "Match" section to `<label class="col-sm-3 control-label">Username</label>`
