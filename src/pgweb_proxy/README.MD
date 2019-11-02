@@ -7,7 +7,7 @@
     * Step 7:
       * Enter localhost:8081 into the only active input box, then stop after step 7. We do not need to allow "Rewrite the domain names of links in HTTP responses".
 * Install and enable ARR for IIS, which can be downloaded [here](https://www.iis.net/downloads/microsoft/application-request-routing).
-* Download/Install node.js with npm via [this link](https://nodejs.org/en/download/). I used the Long Term Support version.
+* Download/Install node.js with npm via [this link](https://nodejs.org/en/download/). The Long Term Support version is suggested.
 * Clone, (fork, or download) the LearnDB [GitHub repo](https://github.com/DASSL/LearnDB) in order to work with the files locally.
   * To install the specific npm packages/modules required, navigate to the `src` fold of the LearnDB clone, then run the command `npm install`
 * To install pgweb, follow the directions as described [here](https://github.com/DASSL/LearnDB/wiki/pgweb-as-a-service).
