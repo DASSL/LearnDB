@@ -13,6 +13,7 @@ REM ALL ARTIFACTS PROVIDED AS IS. NO WARRANTIES EXPRESSED OR IMPLIED. USE AT YOU
 
 REM Batch file to export inbound and outbound rules from IIS ARR
 REM USAGE: exportRules.bat
+REM Will output 2 files named 'rules.xml' and 'outboundRules.xml'
 
 echo "Exporting Rules:"
 %windir%/System32/inetsrv/appcmd list config "Default Web Site" -section:system.webServer/rewrite/rules -xml > rules.xml
