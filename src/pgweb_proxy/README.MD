@@ -14,17 +14,18 @@
 # How to import rules:
 * Go to the `/src/pgweb_proxy` folder of the cloned LearnDB repo.
 * Run the importRules.bat script
+* This will read 2 files named 'rules.xml' and 'outboundRules.xml' with the inbound and outbound rules for the "Default Web Site" server running in IIS.
 # How to export rules:
 * Go to the `/src/pgweb_proxy` folder of the cloned LearnDB repo.
 * Run the exportRules.bat script
-# Rules to Implement the HTML rewriting for the content of pgweb
+* This will output 2 files named 'rules.xml' and 'outboundRules.xml' with the current inbound and outbound rules of the "Default Web Site" server running in IIS.
+# ARR Inbound Rules Implemented in LearnDB
+### Rule to do the URL Rewrite:
+
+# ARR Outbound Rules Implemented in LearnDB
 ### Rules to Change the Title and Header of the page:
-* Add an outbound blank rule titled "Change Title"
-  * Set the "Pattern" field of the "Match" section to `<title>pgweb</title>`
-  * Set the "Value" field of the "Action" section to `<title>LearnDB</title>`
-* Add an outbound blank rule titled "Change Header"
-  * Set the "Pattern" field of the "Match" section to `<h1>pgweb</h1>`
-  * Set the "Value" field of the "Action" section to `<h1>LearnDB</h1>`
+* `<title>pgweb</title>` is changed to `<title>LearnDB</title>`
+* `<h1>pgweb</h1>` is changed to  `<h1>LearnDB</h1>`
 ### Rules to Reorganize the input boxes on the homepage:
 * Add an outbound blank rule titled "Change Username Label to Database"
   * Set the "Pattern" field of the "Match" section to `<label class="col-sm-3 control-label">Username</label>`
@@ -55,4 +56,3 @@
 * Add an outbound blank rule titled "Change pgweb's app.js to my js file to control the Tabs"
   * Set the "Pattern" field of the "Match" section to `<li id="table_connection">Connection</li><li id="table_about">About</li>`
   * Set the "Value" field of the "Action" section to `<script type="text/javascript" src="http://localhost:5000/javascript/pgweb_app.js"></script>`
-    * Note that I have added this file to the LearnDB repo in the 'temp' branch. This file will be temporarily hosted on the node.js server for changing the password.
