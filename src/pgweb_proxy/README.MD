@@ -19,45 +19,30 @@
 * Go to the `/src/pgweb_proxy` folder of the cloned LearnDB repo.
 * Run the exportRules.bat script
 * This will output 2 files named 'rules.xml' and 'outboundRules.xml' with the current inbound and outbound rules of the "Default Web Site" server running in IIS.
+
 # ARR Inbound Rules Implemented in LearnDB
 ### Rule to do the URL Rewrite:
 
 # ARR Outbound Rules Implemented in LearnDB
-* For all rules implemented below, follow the following steps:
+* For each of the rules implemented below, follow these steps:
   1. Add an outbound blank rule.
   2. Add an appropriate title for the rule.
-  2. Set the "Pattern" field of the "Match" section to the HTML that should be replaced.
-  3. Set the "Value" field of the "Action" section to the HTML that should replace the previous HTML.
-### Rules to Change the Title and Header of the page:
-* Change `<title>pgweb</title>` to `<title>LearnDB</title>`
-* Change `<h1>pgweb</h1>` to `<h1>LearnDB</h1>`
-### Rules to Reorganize the input boxes on the homepage:
-* Add an outbound blank rule titled "Change Username Label to Database"
-  * Set the "Pattern" field of the "Match" section to `<label class="col-sm-3 control-label">Username</label>`
-  * Set the "Value" field of the "Action" section to `<label class="col-sm-3 control-label" name="labelDB">Database</label>`
-* Add an outbound blank rule titled "Change Username Input to Database Input"
-  * Set the "Pattern" field of the "Match" section to `<input type="text" id="pg_user" class="form-control" />`
-  * Set the "Value" field of the "Action" section to `<input type="text" id="pg_db" name="inputDB" class="form-control" />`
-* Add an outbound blank rule titled "Change Password Label to Username"
-  * Set the "Pattern" field of the "Match" section to `<label class="col-sm-3 control-label">Password</label>`
-  * Set the "Value" field of the "Action" section to `<label class="col-sm-3 control-label" name="labelUsr">Username</label>`
-* Add an outbound blank rule titled "Change Password Input to Username Input"
-  * Set the "Pattern" field of the "Match" section to `<input type="password" id="pg_password" class="form-control" />`
-  * Set the "Value" field of the "Action" section to `<input type="text" id="pg_user" name="inputUsr" class="form-control" />`
-* Add an outbound blank rule titled "Change Database Label to Password Label"
-  * Set the "Pattern" field of the "Match" section to `<label class="col-sm-3 control-label">Database</label>`
-  * Set the "Value" field of the "Action" section to `<label class="col-sm-3 control-label" name="labelPasswd">Password</label>`
-* Add an outbound blank rule titled "Change Database Input to Password Input"
-  * Set the "Pattern" field of the "Match" section to `<input type="text" id="pg_db" class="form-control" />`
-  * Set the "Value" field of the "Action" section to `<input type="password" id="pg_password" name="inputPasswd" class="form-control" />`
-### Rules to Add the "Change Password" link on the homepage:
-* Add an outbound blank rule titled "Add Link to Change Password Server After Connect Button"
-  * Set the "Pattern" field of the "Match" section to `<button type="button" id="close_connection_window" class="btn btn-block btn-default">Cancel</button>`
-  * Set the "Value" field of the "Action" section to `<button type="button" id="close_connection_window" class="btn btn-block btn-default">Cancel</button></div><div class="col-sm-12" name="divChangePasswd"><p class="help-block"><a href="http://localhost:5000">Change Password</a></p>`
-### Rules to Add the "About" tab within the DB viewer of pgweb:
-* Add an outbound blank rule titled "Add About Tab after Connections"
-  * Set the "Pattern" field of the "Match" section to `<li id="table_connection">Connection</li>`
-  * Set the "Value" field of the "Action" section to `<li id="table_connection">Connection</li><li id="table_about">About</li>`
-* Add an outbound blank rule titled "Change pgweb's app.js to my js file to control the Tabs"
-  * Set the "Pattern" field of the "Match" section to `<li id="table_connection">Connection</li><li id="table_about">About</li>`
-  * Set the "Value" field of the "Action" section to `<script type="text/javascript" src="http://localhost:5000/javascript/pgweb_app.js"></script>`
+  2. Set the "Pattern" field of the "Match" section to the value under "HTML Prior to rewrite".
+  3. Set the "Value" field of the "Action" section to the corresponding value under "HTML after rewrite".
+  
+# Changes in HTML made by ARR Outound Rules at runtime
+| Purpose | HTML Prior to rewrite | HTML after rewrite |
+|:-------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Change the title and header of the page | `<title>pgweb</title>` | `<title>LearnDB</title>` |
+|  | `<h1>pgweb</h1>` | `<h2 style="text-align: center;text-shadow: 0px 1px 0px #fff;color: #999;font-weight: normal;">LearnDB</h2>` |
+|  | `<div class="version"></div>` | `<span class="header" style="font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;">(Based on <a href="https://github.com/sosedoff/" target="_blank">&nbsp;pgweb&nbsp;</a><span class="version"></span>)</span>` |
+| Reorganize the input boxes on the homepage | `<label class="col-sm-3 control-label">Username</label>` | `<label class="col-sm-3 control-label" name="labelDB">Database</label>` |
+|  | `<input type="text" id="pg_user" class="form-control" />` | `<input type="text" id="pg_db" name="inputDB" class="form-control" />` |
+|  | `<label class="col-sm-3 control-label">Password</label>` | `<label class="col-sm-3 control-label" name="labelUsr">Username</label>` |
+|  | `<input type="password" id="pg_password" class="form-control" />` | `<input type="text" id="pg_user" name="inputUsr" class="form-control" />` |
+|  | `<label class="col-sm-3 control-label">Database</label>` | `<label class="col-sm-3 control-label" name="labelPasswd">Password</label>` |
+|  | `<input type="text" id="pg_db" class="form-control" />` | `<input type="password" id="pg_password" name="inputPasswd" class="form-control" />` |
+| Add the "Change Password" link on the homepage | `<button type="button" id="close_connection_window"  class="btn btn-block btn-default">Cancel</button>` | `<button type="button" id="close_connection_window" class="btn btn-block btn-default">Cancel</button></div><div style="text-align:center;" class="col-sm-12" name="divChangePasswd"><p class="help-block"><a href="http://localhost:5000">Change Password</a></p>` |
+| Add the "About" tab within the DB viewer of pgweb | `<li id="table_connection">Connection</li>` | `<li id="table_connection">Connection</li><li id="table_about" onclick="loadAbout();">About</li>` |
+|  | `</head>` | `<script type="text/javascript">function loadAbout() {UrlDecode:%7B}  $("#input").hide(); $("#body").addClass("full"); setCurrentTab("table_about"); document.getElementById("output").innerHTML = '<div class="wrapper"> <table id="results" class="table"><thead id="results_header"><th class="table-header-col" data-name="attribute">About</th><th class="table-header-col" data-name="value"></th></thead><tbody id="results_body"><tr><td data-col="0">LearnDB is a Graphical User Interface for interaction with PostgrSQL and ClassDB. The current implementaion depends on pgweb.</td></tr></tbody></div>';{UrlDecode:%7D}</script></head>` |
+
