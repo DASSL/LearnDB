@@ -36,7 +36,7 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
 * For each of the rules implemented below, follow these steps:
   1. Add an reverse proxy rule.
   2. Set the input field within the "Inbound Rules" section to the URL/IP address of the application/server for which you wish to do the URL rewrite.
-  3. Click OK
+  3. Click `OK` at the bottom of the form.
 ### Rule to do the URL Rewrite:
 | URL prior to rewrite | URL after to rewrite |
 |:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -48,6 +48,7 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
   2. Add an appropriate title for the rule.
   2. Set the "Pattern" field of the "Match" section to the value under "HTML Prior to rewrite".
   3. Set the "Value" field of the "Action" section to the corresponding value under "HTML after rewrite".
+  4. Click `Apply` in the top right, in the "Action" section.
   
 # Changes in HTML made by ARR Outound Rules at runtime
 ### Change the title and header of the page
