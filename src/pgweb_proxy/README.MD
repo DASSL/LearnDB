@@ -33,7 +33,14 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
 * This will output 2 files named 'rules.xml' and 'outboundRules.xml' with the current inbound and outbound rules of the "Default Web Site" server running in IIS.
 
 # ARR Inbound Rules Implemented in LearnDB
+* For each of the rules implemented below, follow these steps:
+  1. Add an reverse proxy rule.
+  2. Set the input field within the "Inbound Rules" section to the URL/IP address of the application/server for which you wish to do the URL rewrite.
+  3. Click OK
 ### Rule to do the URL Rewrite:
+| URL prior to rewrite | URL after to rewrite |
+|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| `localhost` | `localhost:8081` |
 
 # ARR Outbound Rules Implemented in LearnDB
 * For each of the rules implemented below, follow these steps:
