@@ -1,3 +1,15 @@
+# Outline
+This solution uses Internet Information Services(IIS) and Application Request Routing(ARR) to change :
+  * Change the title and header of the homepage
+  * Reorganize the input boxes on the homepage
+  * Add the "Change Password" link on the homepage
+  * Add the "About" tab within the DB viewer of pgweb
+  
+  This solution also includes two scripts:
+  
+  *  **importRules.bat** imports HTML rewrite rules into IIS ARR.
+  
+  *  **exportRules.bat** is an optional file to export inbound and outbound rules from IIS ARR.
 # Installation:
 * Install IIS, following the instructions as described [here](https://github.com/DASSL/LearnDB/wiki/How-to-get-and-setup-a-free-SSL-certificate-for-Windows-Server-2016) under the heading "Add IIS Manager".
 * Install the URL-rewrite 2.1 extension as described [here](https://github.com/DASSL/LearnDB/wiki/Setup-pgweb-on-Windows-Server-2016-to-use-HTTPS) under the heading "Setting up the reverse proxy for HTTPS connections".
