@@ -31,18 +31,29 @@
   3. Set the "Value" field of the "Action" section to the corresponding value under "HTML after rewrite".
   
 # Changes in HTML made by ARR Outound Rules at runtime
-| Purpose | HTML Prior to rewrite | HTML after rewrite |
-|:-------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Change the title and header of the page | `<title>pgweb</title>` | `<title>LearnDB</title>` |
-|  | `<h1>pgweb</h1>` | `<h2 style="text-align: center;text-shadow: 0px 1px 0px #fff;color: #999;font-weight: normal;">LearnDB</h2>` |
-|  | `<div class="version"></div>` | `<span class="header" style="font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;">(Based on <a href="https://github.com/sosedoff/" target="_blank">&nbsp;pgweb&nbsp;</a><span class="version"></span>)</span>` |
-| Reorganize the input boxes on the homepage | `<label class="col-sm-3 control-label">Username</label>` | `<label class="col-sm-3 control-label" name="labelDB">Database</label>` |
-|  | `<input type="text" id="pg_user" class="form-control" />` | `<input type="text" id="pg_db" name="inputDB" class="form-control" />` |
-|  | `<label class="col-sm-3 control-label">Password</label>` | `<label class="col-sm-3 control-label" name="labelUsr">Username</label>` |
-|  | `<input type="password" id="pg_password" class="form-control" />` | `<input type="text" id="pg_user" name="inputUsr" class="form-control" />` |
-|  | `<label class="col-sm-3 control-label">Database</label>` | `<label class="col-sm-3 control-label" name="labelPasswd">Password</label>` |
-|  | `<input type="text" id="pg_db" class="form-control" />` | `<input type="password" id="pg_password" name="inputPasswd" class="form-control" />` |
-| Add the "Change Password" link on the homepage | `<button type="button" id="close_connection_window"  class="btn btn-block btn-default">Cancel</button>` | `<button type="button" id="close_connection_window" class="btn btn-block btn-default">Cancel</button></div><div style="text-align:center;" class="col-sm-12" name="divChangePasswd"><p class="help-block"><a href="http://localhost:5000">Change Password</a></p>` |
-| Add the "About" tab within the DB viewer of pgweb | `<li id="table_connection">Connection</li>` | `<li id="table_connection">Connection</li><li id="table_about" onclick="loadAbout();">About</li>` |
-|  | `</head>` | `<script type="text/javascript">function loadAbout() {UrlDecode:%7B}  $("#input").hide(); $("#body").addClass("full"); setCurrentTab("table_about"); document.getElementById("output").innerHTML = '<div class="wrapper"> <table id="results" class="table"><thead id="results_header"><th class="table-header-col" data-name="attribute">About</th><th class="table-header-col" data-name="value"></th></thead><tbody id="results_body"><tr><td data-col="0">LearnDB is a Graphical User Interface for interaction with PostgrSQL and ClassDB. The current implementaion depends on pgweb.</td></tr></tbody></div>';{UrlDecode:%7D}</script></head>` |
+### Change the title and header of the page
+| HTML Prior to rewrite | HTML after rewrite |
+|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| `<title>pgweb</title>` | `<title>LearnDB</title>` |
+| `<h1>pgweb</h1>` | `<h2 style="text-align: center;text-shadow: 0px 1px 0px #fff;color: #999;font-weight: normal;">LearnDB</h2>` |
+| `<div class="version"></div>` | `<span class="header" style="font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;">(Based on <a href="https://github.com/sosedoff/" target="_blank">&nbsp;pgweb&nbsp;</a><span class="version"></span>)</span>` |
+### Reorganize the input boxes on the homepage 
+| HTML Prior to rewrite | HTML after rewrite |
+|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| `<label class="col-sm-3 control-label">Username</label>` | `<label class="col-sm-3 control-label" name="labelDB">Database</label>` |
+| `<input type="text" id="pg_user" class="form-control" />` | `<input type="text" id="pg_db" name="inputDB" class="form-control" />` |
+| `<label class="col-sm-3 control-label">Password</label>` | `<label class="col-sm-3 control-label" name="labelUsr">Username</label>` |
+| `<input type="password" id="pg_password" class="form-control" />` | `<input type="text" id="pg_user" name="inputUsr" class="form-control" />` |
+| `<label class="col-sm-3 control-label">Database</label>` | `<label class="col-sm-3 control-label" name="labelPasswd">Password</label>` |
+| `<input type="text" id="pg_db" class="form-control" />` | `<input type="password" id="pg_password" name="inputPasswd" class="form-control" />` |
+
+### Add the "Change Password" link on the homepage 
+| HTML Prior to rewrite | HTML after rewrite |
+|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| `<button type="button" id="close_connection_window"  class="btn btn-block btn-default">Cancel</button>` | `<button type="button" id="close_connection_window" class="btn btn-block btn-default">Cancel</button></div><div style="text-align:center;" class="col-sm-12" name="divChangePasswd"><p class="help-block"><a href="http://localhost:5000">Change Password</a></p>` |
+### Add the "About" tab within the DB viewer of pgweb 
+| HTML Prior to rewrite | HTML after rewrite |
+|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| `<li id="table_connection">Connection</li>` | `<li id="table_connection">Connection</li><li id="table_about" onclick="loadAbout();">About</li>` |
+| `</head>` | `<script type="text/javascript">function loadAbout() {UrlDecode:%7B}  $("#input").hide(); $("#body").addClass("full"); setCurrentTab("table_about"); document.getElementById("output").innerHTML = '<div class="wrapper"> <table id="results" class="table"><thead id="results_header"><th class="table-header-col" data-name="attribute">About</th><th class="table-header-col" data-name="value"></th></thead><tbody id="results_body"><tr><td data-col="0">LearnDB is a Graphical User Interface for interaction with PostgrSQL and ClassDB. The current implementaion depends on pgweb.</td></tr></tbody></div>';{UrlDecode:%7D}</script></head>` |
 
