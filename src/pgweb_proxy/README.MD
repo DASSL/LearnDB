@@ -24,6 +24,7 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
   * To install the specific npm packages/modules required, navigate to the `src` fold of the LearnDB clone, then run the command `npm install`
 * To install pgweb, follow the directions as described [here](https://github.com/DASSL/LearnDB/wiki/pgweb-as-a-service).
 # How to use import/export scripts:
+* The import and export scripts use AppCmd, by Microsoft, to import/export rules to/from IIS ARR. The documentation for using this application can be found [here](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj635852(v%3Dws.11)).
 ### How to import rules:
 * Go to the `/src/pgweb_proxy` folder of the cloned LearnDB repo.
 * Run the importRules.bat script
@@ -33,7 +34,6 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
 * Run the exportRules.bat script
 * This will output 2 files named 'rules.xml' and 'outboundRules.xml' with the current inbound and outbound rules of the "Default Web Site" server running in IIS.
 ### Altering Scripts:
-* The import and export scripts use AppCmd, by Microsoft, to import/export rules to/from IIS ARR. The documentation for using this application can be found [here](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj635852(v%3Dws.11)).
 * Our import script uses the form:
   * `%windir%/System32/inetsrv/appcmd set config "SITE/SERVER" -in < FILENAME.xml`
    * `SITE/SERVER` should be replaced with the name of the site or server to which the rules will be imported.
