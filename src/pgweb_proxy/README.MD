@@ -35,9 +35,14 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
 ### Altering Scripts:
 * The import and export scripts use AppCmd, by Microsoft, to import/export rules to/from IIS ARR. The documentation for using this application can be found [here](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj635852(v%3Dws.11)).
 * Our import script uses the form:
-  *
+  * `%windir%/System32/inetsrv/appcmd set config "SITE/SERVER" -in < FILENAME.xml`
+   * `SITE/SERVER` should be replaced with the name of the site or server to which the rules will be imported.
+   * `FILENAME` should be replaced with the name of the file from which the rules should be imported.
 * Our export script uses the form:
-  *
+  * `%windir%/System32/inetsrv/appcmd list config "SITE/SERVER" -section:system.webServer/rewrite/SECTION -xml > FILENAME.xml`
+   * `SITE/SERVER` should be replaced with the name of the site or server to which the rules will be imported.
+   * `FILENAME` should be replaced with the name of the file from which the rules should be imported.
+   * `SECTION` should be replaced with the tag which encases a particular set of rules. For example: `rules` for inbound rules or `outboundRules` for outbound rules.
 # ARR Inbound Rules Implemented in LearnDB
 * For each of the rules implemented below, follow these steps:
   1. Add an reverse proxy rule.
