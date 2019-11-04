@@ -23,15 +23,21 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
 * Clone, (fork, or download) the LearnDB [GitHub repo](https://github.com/DASSL/LearnDB) in order to work with the files locally.
   * To install the specific npm packages/modules required, navigate to the `src` fold of the LearnDB clone, then run the command `npm install`
 * To install pgweb, follow the directions as described [here](https://github.com/DASSL/LearnDB/wiki/pgweb-as-a-service).
-# How to import rules:
+# How to use import/export scripts:
+### How to import rules:
 * Go to the `/src/pgweb_proxy` folder of the cloned LearnDB repo.
 * Run the importRules.bat script
 * This will read 2 files named 'rules.xml' and 'outboundRules.xml' with the inbound and outbound rules for the "Default Web Site" server running in IIS.
-# How to export rules:
+### How to export rules:
 * Go to the `/src/pgweb_proxy` folder of the cloned LearnDB repo.
 * Run the exportRules.bat script
 * This will output 2 files named 'rules.xml' and 'outboundRules.xml' with the current inbound and outbound rules of the "Default Web Site" server running in IIS.
-
+### Altering Scripts:
+* The import and export scripts use AppCmd, by Microsoft, to import/export rules to/from IIS ARR. The documentation for using this application can be found [here](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj635852(v%3Dws.11)).
+* Our import script uses the form:
+  *
+* Our export script uses the form:
+  *
 # ARR Inbound Rules Implemented in LearnDB
 * For each of the rules implemented below, follow these steps:
   1. Add an reverse proxy rule.
