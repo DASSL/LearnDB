@@ -23,6 +23,16 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
 * Clone, (fork, or download) the LearnDB [GitHub repo](https://github.com/DASSL/LearnDB) in order to work with the files locally.
   * To install the specific npm packages/modules required, navigate to the `src` fold of the LearnDB clone, then run the command `npm install`
 * To install pgweb, follow the directions as described [here](https://github.com/DASSL/LearnDB/wiki/pgweb-as-a-service).
+# How to Run each Service:
+* pgweb:
+  * Run from the command line with the flag `--sessions`
+  * (By default in the DASSL VM, pgweb is intalled in C:/pgweb)
+* IIS:
+  * Start from GUI. Search for `iis` in the windows search feature. Select "Internet Information Services (IIS) Manager"
+  * Expand the tabs under the "Connections" window on the far left and navigate to and double click on "Default Web Site".
+  * Click "Start" on the right-hand side in the "Actions" tab, underneath the "Manage Website" sub-tab.
+* LearnDB node.js server for Change Password functionality:
+  * In a command terminal, navigate to the `src` folder of the LearnDB clone, then run the command `npm start`.
 # How to use import/export scripts:
 * The import and export scripts use AppCmd, by Microsoft, to import/export rules to/from IIS ARR. The documentation for using this application can be found [here](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj635852(v%3Dws.11)).
 ### How to import rules:
