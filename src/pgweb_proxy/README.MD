@@ -25,7 +25,7 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
 * To install pgweb, follow the directions as described [here](https://github.com/DASSL/LearnDB/wiki/pgweb-as-a-service).
 # How to Run each Service:
 * pgweb:
-  * Run from the command line with the flag `--sessions`
+  * Run pgweb from a command prompt by navigating to the folder which houses the pgweb executable. Type the name of the executable followed by a space then the command line argument: `--sessions`, then hit enter.
   * (By default in the DASSL VM, pgweb is intalled in C:/pgweb)
 * IIS:
   * Start from GUI. Search for `iis` in the windows search feature. Select "Internet Information Services (IIS) Manager"
