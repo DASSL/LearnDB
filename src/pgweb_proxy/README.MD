@@ -10,6 +10,13 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
   *  **importRules.bat** imports HTML rewrite rules into IIS ARR.
   
   *  **exportRules.bat** is an optional file to export inbound and outbound rules from IIS ARR.
+  
+  ### Directions:
+  * Follow Installation Guide
+  * Start all services
+  * Run the importRules.bat batch file
+  * Connect to `localhost` via a web browser to use LearnDB
+  
 # Installation:
 * Install IIS, following the instructions as described [here](https://github.com/DASSL/LearnDB/wiki/How-to-get-and-setup-a-free-SSL-certificate-for-Windows-Server-2016) under the heading "Add IIS Manager".
 * Install the URL-rewrite 2.1 extension as described [here](https://github.com/DASSL/LearnDB/wiki/Setup-pgweb-on-Windows-Server-2016-to-use-HTTPS) under the heading "Setting up the reverse proxy for HTTPS connections".
