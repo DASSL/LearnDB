@@ -84,7 +84,7 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
 |:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | `<title>pgweb</title>` | `<title>LearnDB</title>` |
 | `<h1>pgweb</h1>` | `<h2 style="text-align: center;text-shadow: 0px 1px 0px #fff;color: #999;font-weight: normal;">LearnDB</h2>` |
-| `<div class="version"></div>` | `<span class="header" style="font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;">(Based on <a href="https://github.com/sosedoff/" target="_blank">&nbsp;pgweb&nbsp;</a><span class="version"></span>)</span>` |
+| `<div class="version"></div>` | `<span class="header" style="font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;">(Based on <a href="https://github.com/sosedoff/pgweb" target="_blank">&nbsp;pgweb&nbsp;</a><span class="version"></span>)</span>` |
 ### Reorganize the input boxes on the homepage 
 | HTML Prior to rewrite | HTML after rewrite |
 |:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
