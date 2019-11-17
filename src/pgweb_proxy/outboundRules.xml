@@ -1,183 +1,92 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<appcmd>
-
-    <CONFIG CONFIG.SECTION="system.webServer/rewrite/outboundRules" path="MACHINE/WEBROOT/APPHOST/Default Web Site" overrideMode="Inherit" locked="false">
-
-        <system.webServer-rewrite-outboundRules>
-
-            <customTags>
-
-                <tags name="myTags">
-
-                    <tag name="header" attribute="h1" />
-
-                </tags>
-
-                <tags name="header">
-
-                    <tag name="&lt;h1>" attribute="&lt;h1>" />
-
-                </tags>
-
-            </customTags>
-
-            <preConditions>
-
-                <preCondition name="ResponseIsHtml1">
-
-                    <add input="{RESPONSE_CONTENT_TYPE}" pattern="^text/html" />
-
-                </preCondition>
-
-            </preConditions>
-
-            <rule name="Change Title">
-
-                <match pattern="&lt;title>pgweb&lt;/title>" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;title>LearnDB&lt;/title>" />
-
-            </rule>
-
-            <rule name="Change Heading">
-
-                <match filterByTags="None" pattern="&lt;h1>pgweb&lt;/h1>" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;h2 style=&quot;text-align: center;text-shadow: 0px 1px 0px #fff;color: #999;font-weight: normal;&quot;>LearnDB&lt;/h2>" />
-
-            </rule>
-
-            <rule name="Change Username Label to Database">
-
-                <match filterByTags="None" pattern="&lt;label class=&quot;col-sm-3 control-label&quot;>Username&lt;/label>" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;label class=&quot;col-sm-3 control-label&quot; name=&quot;labelDB&quot;>Database&lt;/label>" />
-
-            </rule>
-
-            <rule name="Change Username Input to Database Input">
-
-                <match filterByTags="None" pattern="&lt;input type=&quot;text&quot; id=&quot;pg_user&quot; class=&quot;form-control&quot; />" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;input type=&quot;text&quot; id=&quot;pg_db&quot; name=&quot;inputDB&quot; class=&quot;form-control&quot; />" />
-
-            </rule>
-
-            <rule name="Change Password Label to Username">
-
-                <match pattern="&lt;label class=&quot;col-sm-3 control-label&quot;>Password&lt;/label>" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;label class=&quot;col-sm-3 control-label&quot; name=&quot;labelUsr&quot;>Username&lt;/label>" />
-
-            </rule>
-
-            <rule name="Change Password Input to Username Input">
-
-                <match pattern="&lt;input type=&quot;password&quot; id=&quot;pg_password&quot; class=&quot;form-control&quot; />" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;input type=&quot;text&quot; id=&quot;pg_user&quot; name=&quot;inputUsr&quot; class=&quot;form-control&quot; />" />
-
-            </rule>
-
-            <rule name="Change Database Label to Password">
-
-                <match pattern="&lt;label class=&quot;col-sm-3 control-label&quot;>Database&lt;/label>" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;label class=&quot;col-sm-3 control-label&quot; name=&quot;labelPasswd&quot;>Password&lt;/label>" />
-
-            </rule>
-
-            <rule name="Change Database Input to Password Input">
-
-                <match filterByTags="None" pattern="&lt;input type=&quot;text&quot; id=&quot;pg_db&quot; class=&quot;form-control&quot; />" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;input type=&quot;password&quot; id=&quot;pg_password&quot; name=&quot;inputPasswd&quot; class=&quot;form-control&quot; />" />
-
-            </rule>
-
-            <rule name="Add Link After Connect Button">
-
-                <match filterByTags="None" pattern="&lt;button type=&quot;button&quot; id=&quot;close_connection_window&quot; class=&quot;btn btn-block btn-default&quot;>Cancel&lt;/button>" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;button type=&quot;button&quot; id=&quot;close_connection_window&quot; class=&quot;btn btn-block btn-default&quot;>Cancel&lt;/button>&lt;/div>&lt;div style=&quot;text-align:center;&quot; class=&quot;col-sm-12&quot; name=&quot;divChangePasswd&quot;>&lt;p class=&quot;help-block&quot;>&lt;a href=&quot;http://localhost:5000&quot;>Change Password&lt;/a>&lt;/p>" />
-
-            </rule>
-
-            <rule name="Add Tab After Connections">
-
-                <match filterByTags="None" pattern="&lt;li id=&quot;table_connection&quot;>Connection&lt;/li>" />
-
-                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;li id=&quot;table_connection&quot;>Connection&lt;/li>&lt;li id=&quot;table_about&quot; onclick=&quot;loadAbout();&quot;>About&lt;/li>" />
-
-            </rule>
-
-            <rule name="Insert loadAbout() script before &lt;/head>" patternSyntax="ExactMatch">
-
-                <match filterByTags="None" pattern="&lt;/head>" />
-
-                <conditions>
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;script type=&quot;text/javascript&quot;>function loadAbout() {UrlDecode:%7B}  $(&quot;#input&quot;).hide(); $(&quot;#body&quot;).addClass(&quot;full&quot;); setCurrentTab(&quot;table_about&quot;); document.getElementById(&quot;output&quot;).innerHTML = '&lt;div class=&quot;wrapper&quot;> &lt;table id=&quot;results&quot; class=&quot;table&quot;>&lt;thead id=&quot;results_header&quot;>&lt;th class=&quot;table-header-col&quot; data-name=&quot;attribute&quot;>About&lt;/th>&lt;th class=&quot;table-header-col&quot; data-name=&quot;value&quot;>&lt;/th>&lt;/thead>&lt;tbody id=&quot;results_body&quot;>&lt;tr>&lt;td data-col=&quot;0&quot;>LearnDB is a Graphical User Interface for interaction with PostgrSQL and ClassDB. The current implementaion depends on pgweb.&lt;/td>&lt;/tr>&lt;/tbody>&lt;/div>';{UrlDecode:%7D}&lt;/script>&lt;/head>" />
-
-            </rule>
-
-            <rule name="Changer version of pgweb to (&quot;Based on pgweb&quot; + versionNumber)">
-
-                <match filterByTags="None" pattern="&lt;div class=&quot;version&quot;>&lt;/div>" negate="true" />
-
-                <conditions>
-
-                </conditions>
-
-                <action type="Rewrite" value="&lt;span class=&quot;header&quot; style=&quot;font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;&quot;>(Based on &lt;a href=&quot;https://github.com/sosedoff/pgweb&quot; target=&quot;_blank&quot;>&amp;nbsp;pgweb&amp;nbsp;&lt;/a>&lt;span class=&quot;version&quot;>&lt;/span>)&lt;/span>" />
-
-            </rule>
-
-        </system.webServer-rewrite-outboundRules>
-
-    </CONFIG>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<appcmd>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/outboundRules" path="MACHINE/WEBROOT/APPHOST/Default Web Site" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-outboundRules>
+            <customTags>
+                <tags name="myTags">
+                    <tag name="header" attribute="h1" />
+                </tags>
+                <tags name="header">
+                    <tag name="&lt;h1>" attribute="&lt;h1>" />
+                </tags>
+            </customTags>
+            <preConditions>
+                <preCondition name="ResponseIsHtml1">
+                    <add input="{RESPONSE_CONTENT_TYPE}" pattern="^text/html" />
+                </preCondition>
+            </preConditions>
+            <rule name="Change Title">
+                <match pattern="&lt;title>pgweb&lt;/title>" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;title>LearnDB&lt;/title>" />
+            </rule>
+            <rule name="Change Heading">
+                <match filterByTags="None" pattern="&lt;h1>pgweb&lt;/h1>" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;h2 style=&quot;text-align: center;text-shadow: 0px 1px 0px #fff;color: #999;font-weight: normal;&quot;>LearnDB&lt;/h2>" />
+            </rule>
+            <rule name="Change Username Label to Database">
+                <match filterByTags="None" pattern="&lt;label class=&quot;col-sm-3 control-label&quot;>Username&lt;/label>" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;label class=&quot;col-sm-3 control-label&quot; name=&quot;labelDB&quot;>Database&lt;/label>" />
+            </rule>
+            <rule name="Change Username Input to Database Input">
+                <match filterByTags="None" pattern="&lt;input type=&quot;text&quot; id=&quot;pg_user&quot; class=&quot;form-control&quot; />" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;input type=&quot;text&quot; id=&quot;pg_db&quot; name=&quot;inputDB&quot; class=&quot;form-control&quot; />" />
+            </rule>
+            <rule name="Change Password Label to Username">
+                <match pattern="&lt;label class=&quot;col-sm-3 control-label&quot;>Password&lt;/label>" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;label class=&quot;col-sm-3 control-label&quot; name=&quot;labelUsr&quot;>Username&lt;/label>" />
+            </rule>
+            <rule name="Change Password Input to Username Input">
+                <match pattern="&lt;input type=&quot;password&quot; id=&quot;pg_password&quot; class=&quot;form-control&quot; />" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;input type=&quot;text&quot; id=&quot;pg_user&quot; name=&quot;inputUsr&quot; class=&quot;form-control&quot; />" />
+            </rule>
+            <rule name="Change Database Label to Password">
+                <match pattern="&lt;label class=&quot;col-sm-3 control-label&quot;>Database&lt;/label>" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;label class=&quot;col-sm-3 control-label&quot; name=&quot;labelPasswd&quot;>Password&lt;/label>" />
+            </rule>
+            <rule name="Change Database Input to Password Input">
+                <match filterByTags="None" pattern="&lt;input type=&quot;text&quot; id=&quot;pg_db&quot; class=&quot;form-control&quot; />" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;input type=&quot;password&quot; id=&quot;pg_password&quot; name=&quot;inputPasswd&quot; class=&quot;form-control&quot; />" />
+            </rule>
+            <rule name="Add Link After Connect Button">
+                <match filterByTags="None" pattern="&lt;button type=&quot;button&quot; id=&quot;close_connection_window&quot; class=&quot;btn btn-block btn-default&quot;>Cancel&lt;/button>" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;button type=&quot;button&quot; id=&quot;close_connection_window&quot; class=&quot;btn btn-block btn-default&quot;>Cancel&lt;/button>&lt;/div>&lt;div style=&quot;text-align:center;&quot; class=&quot;col-sm-12&quot; name=&quot;divChangePasswd&quot;>&lt;p class=&quot;help-block&quot;>&lt;a href=&quot;http://localhost:5000&quot;>Change Password&lt;/a>&lt;/p>" />
+            </rule>
+            <rule name="Add Tab After Connections">
+                <match filterByTags="None" pattern="&lt;li id=&quot;table_connection&quot;>Connection&lt;/li>" />
+                <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                </conditions>
+                <action type="Rewrite" value="&lt;li id=&quot;table_connection&quot;>Connection&lt;/li>&lt;li id=&quot;table_about&quot; onclick=&quot;loadAbout();&quot;>About&lt;/li>" />
+            </rule>
+            <rule name="Insert loadAbout() script before &lt;/head>" patternSyntax="ExactMatch">
+                <match filterByTags="None" pattern="&lt;/head>" />
+                <conditions>
+                </conditions>
+                <action type="Rewrite" value="&lt;script type=&quot;text/javascript&quot;>function loadAbout() {UrlDecode:%7B}  $(&quot;#input&quot;).hide(); $(&quot;#body&quot;).addClass(&quot;full&quot;); setCurrentTab(&quot;table_about&quot;); document.getElementById(&quot;output&quot;).innerHTML = '&lt;div class=&quot;wrapper&quot;> &lt;table id=&quot;results&quot; class=&quot;table&quot;>&lt;thead id=&quot;results_header&quot;>&lt;th class=&quot;table-header-col&quot; data-name=&quot;attribute&quot;>About&lt;/th>&lt;th class=&quot;table-header-col&quot; data-name=&quot;value&quot;>&lt;/th>&lt;/thead>&lt;tbody id=&quot;results_body&quot;>&lt;tr>&lt;td data-col=&quot;0&quot;>LearnDB is a Graphical User Interface for interaction with PostgrSQL. The current implementation depends on &lt;a href=&quot;https://github.com/sosedoff/pgweb&quot; target=&quot;_blank&quot;>pgweb&lt;/a>.&lt;/td>&lt;/tr>&lt;/tbody>&lt;/table>&lt;/div>';{UrlDecode:%7D}&lt;/script>&lt;/head>" />
+            </rule>
+            <rule name="Changer version of pgweb to (&quot;Based on pgweb&quot; + versionNumber)">
+                <match filterByTags="None" pattern="&lt;div class=&quot;version&quot;>&lt;/div>" negate="true" />
+                <conditions>
+                </conditions>
+                <action type="Rewrite" value="&lt;span class=&quot;header&quot; style=&quot;font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;&quot;>(Based on &lt;a href=&quot;https://github.com/sosedoff/pgweb&quot; target=&quot;_blank&quot;>&amp;nbsp;pgweb&amp;nbsp;&lt;/a>&lt;span class=&quot;version&quot;>&lt;/span>)&lt;/span>" />
+            </rule>
+        </system.webServer-rewrite-outboundRules>
+    </CONFIG>
 </appcmd>
