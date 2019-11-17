@@ -78,7 +78,7 @@ This solution uses Internet Information Services(IIS) and Application Request Ro
   3. Set the "Value" field of the "Action" section to the corresponding value under "HTML after rewrite".
   4. Click `Apply` in the top right, in the "Action" section.
   
-# Changes in HTML made by ARR Outound Rules at runtime
+# Changes in HTML made by ARR Outbound Rules at runtime
 ### Change the title and header of the page
 | HTML Prior to rewrite | HTML after rewrite |
 |:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
