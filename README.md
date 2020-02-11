@@ -25,8 +25,9 @@ The following figure depicts the current architecture.
 
 ## Installation
 
-The two parts of LearnDB are installed and run separately. See the `README` 
-in directory `src\pgweb_proxy` on steps to install and run the Query Server.
+The parts of LearnDB--Query server and Change-Password server--are installed 
+and run separately. See the `README` in directory `src\pgweb_proxy` on 
+steps to install and run the Query server.
 
 The Change-Password server is a Node.js Express web server (tested with 
 LTS Version 10.16.2). Follow these steps to install and run the server:
