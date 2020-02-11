@@ -42,7 +42,7 @@ By default, the Change-Password server listens on `localhost:5000`, unless
 a different IP address and port are specified in code or in the environment.
 
 
-# Credits
+## Credits
 
 LearnDB is developed at the Data Science & Systems Lab ([DASSL](http://dassl.github.io/), 
 read _dazzle_).
