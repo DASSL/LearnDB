@@ -8,13 +8,7 @@ provides an architectural overview of LearnDB.)
 
 The proxy is a web front-end and redirects incoming requests to pgweb. It then
 dynamically rewrites some of the content pgweb returns so that the end result 
-meets the requirements of LearnDB. The following is a list of the changes the 
-proxy makes to pgweb content:
-- Change the title of all pages
-- Change heading on login page
-- Reorder input boxes on login page
-- Add a "Change Password" link to login page
-- Add an "About" tab to the query page
+meets the requirements of LearnDB. 
 
 Presently, the proxy server uses the Internet Information Services (IIS) 
 and a couple of its extensions. However, the proxy could be any web server 
@@ -39,15 +33,11 @@ __Note:__ The proxy also provides an opportunity to provide secure transport
 4. In the default site within IIS, configure the "URL Rewrite" item to forward 
    incoming requests to pgweb. In the first text field under "Inbound Rules", 
    enter the server and port where pgweb is listening. For example, if pgweb 
-   listens on port 1337 on the same machine, enter `localhost:1337`
+   listens on port 8081 on the same machine, enter `localhost:8081`
 
 5. Install the IIS extension ["Application Request Routing"](https://www.iis.net/downloads/microsoft/application-request-routing)
 
 6. Import rewrite rules into IIS: Navigate to the `/src/pgweb_proxy` directory
-   and run the batch command `importRules.bat`
-
-The batch commands to import and export rules use [AppCmd]((https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj635852(v%3Dws.11))),
-a program distributed with IIS.
-
-See the `/docs` directory for details on importing and exporting rules, as well 
-as details of the actual rewrite rules.
+   and run the batch command `importRules.bat`. See the `/docs` directory 
+   for details on importing and exporting rules, as well as details of the 
+   actual rewrites performed.
