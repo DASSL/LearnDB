@@ -6,18 +6,19 @@ REM Adam Jeniski, Caleb Garrick
 REM CC 4.0 BY-NC-SA
 REM https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-REM Copyright (c) 2017- DASSL. ALL RIGHTS RESERVED.
+REM Copyright (c) 2019- DASSL. ALL RIGHTS RESERVED.
 
 REM ALL ARTIFACTS PROVIDED AS IS. NO WARRANTIES EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
 
-
-REM Batch file to export inbound and outbound rules from IIS ARR
+REM Batch file to export inbound and outbound rules from IIS ARR to 'rules.xml' and 'outboundRules.xml'
 REM USAGE: exportRules.bat
-REM Will output 2 files named 'rules.xml' and 'outboundRules.xml'
+REM Uses the AppCmd program included with IIS
+REM https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj635852(v=ws.11)
 
-echo "Exporting Rules:"
+
+echo "Exporting rules:"
 %windir%/System32/inetsrv/appcmd list config "Default Web Site" -section:system.webServer/rewrite/rules -xml > rules.xml
-echo "Exporting Outbound Rules:"
+echo "Exporting outbound rules:"
 %windir%/System32/inetsrv/appcmd list config "Default Web Site" -section:system.webServer/rewrite/outboundRules -xml > outboundRules.xml
-echo "Done exporting rules.
+echo "Done exporting all rules.
 PAUSE
