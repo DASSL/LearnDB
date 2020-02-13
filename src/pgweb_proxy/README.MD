@@ -1,107 +1,53 @@
-# Outline
-This solution uses Internet Information Services(IIS) and Application Request Routing(ARR) to change :
-  * Change the title and header of the homepage
-  * Reorganize the input boxes on the homepage
-  * Add the "Change Password" link on the homepage
-  * Add the "About" tab within the DB viewer of pgweb
-  
-  This solution also includes two scripts:
-  
-  *  **importRules.bat** imports HTML rewrite rules into IIS ARR.
-  
-  *  **exportRules.bat** is an optional file to export inbound and outbound rules from IIS ARR.
-  
-  ### Directions:
-  * Follow Installation Guide
-  * Start all services
-  * Run the importRules.bat batch file
-  * Connect to `localhost` via a web browser to use LearnDB
-  
-# Installation:
-* Install IIS, following the instructions as described [here](https://github.com/DASSL/LearnDB/wiki/How-to-get-and-setup-a-free-SSL-certificate-for-Windows-Server-2016) under the heading "Add IIS Manager".
-* Install the URL-rewrite 2.1 extension as described [here](https://github.com/DASSL/LearnDB/wiki/Setup-pgweb-on-Windows-Server-2016-to-use-HTTPS) under the heading "Setting up the reverse proxy for HTTPS connections".
-  * Additional context for several steps:
-    * Step 1:
-      * Within IIS, open up the "Default Web Site" by expanding the tabs in the "Connections" window and double click on the site. The "Bindings..." option will appear in the "Actions" window on the far right, under the "Edit Site" tab.
-    * Step 7:
-      * Enter localhost:8081 into the only active input box, then stop after step 7. We do not need to allow "Rewrite the domain names of links in HTTP responses".
-* Install and enable ARR for IIS, which can be downloaded [here](https://www.iis.net/downloads/microsoft/application-request-routing).
-* Download/Install node.js with npm via [this link](https://nodejs.org/en/download/). The Long Term Support version is suggested.
-* Clone, (fork, or download) the LearnDB [GitHub repo](https://github.com/DASSL/LearnDB) in order to work with the files locally.
-  * To install the specific npm packages/modules required, navigate to the `src` fold of the LearnDB clone, then run the command `npm install`
-* To install pgweb, follow the directions as described [here](https://github.com/DASSL/LearnDB/wiki/pgweb-as-a-service).
-# How to Run each Service:
-* pgweb:
-  * Run pgweb from a command prompt by navigating to the folder which houses the pgweb executable. Type the name of the executable followed by a space then the command line argument: `--sessions`, then hit enter.
-  * (By default in the DASSL VM, pgweb is intalled in C:/pgweb)
-* IIS:
-  * Start from GUI. Search for `iis` in the windows search feature. Select "Internet Information Services (IIS) Manager"
-  * Expand the tabs under the "Connections" window on the far left and navigate to and double click on "Default Web Site".
-  * Click "Start" on the right-hand side in the "Actions" tab, underneath the "Manage Website" sub-tab.
-* LearnDB node.js server for Change Password functionality:
-  * In a command terminal, navigate to the `src` folder of the LearnDB clone, then run the command `npm start`.
-# How to use import/export scripts:
-* The import and export scripts use AppCmd, by Microsoft, to import/export rules to/from IIS ARR. The documentation for using this application can be found [here](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj635852(v%3Dws.11)).
-### How to import rules:
-* Go to the `/src/pgweb_proxy` folder of the cloned LearnDB repo.
-* Run the importRules.bat script
-* This will read 2 files named 'rules.xml' and 'outboundRules.xml' with the inbound and outbound rules for the "Default Web Site" server running in IIS.
-### How to export rules:
-* Go to the `/src/pgweb_proxy` folder of the cloned LearnDB repo.
-* Run the exportRules.bat script
-* This will output 2 files named 'rules.xml' and 'outboundRules.xml' with the current inbound and outbound rules of the "Default Web Site" server running in IIS.
-### Altering Scripts:
-* Our import script uses the form:
-  * `%windir%/System32/inetsrv/appcmd set config "SITE/SERVER" -in < FILENAME.xml`
-   * `SITE/SERVER` should be replaced with the name of the site or server to which the rules will be imported.
-   * `FILENAME` should be replaced with the name of the file from which the rules should be imported.
-* Our export script uses the form:
-  * `%windir%/System32/inetsrv/appcmd list config "SITE/SERVER" -section:system.webServer/rewrite/SECTION -xml > FILENAME.xml`
-   * `SITE/SERVER` should be replaced with the name of the site or server to which the rules will be imported.
-   * `FILENAME` should be replaced with the name of the file from which the rules should be imported.
-   * `SECTION` should be replaced with the tag which encases a particular set of rules. For example: `rules` for inbound rules or `outboundRules` for outbound rules.
-# ARR Inbound Rules Implemented in LearnDB
-* For each of the rules implemented below, follow these steps:
-  1. Add an reverse proxy rule.
-  2. Set the input field within the "Inbound Rules" section to the URL/IP address of the application/server for which you wish to do the URL rewrite.
-  3. Click `OK` at the bottom of the form.
-### Rule to do the URL Rewrite:
-| URL prior to rewrite | URL after to rewrite |
-|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| `localhost` | `localhost:8081` |
+This document provides an overview of the Query server component of LearnDB.
+It also lists the steps to install the Query server. 
 
-# ARR Outbound Rules Implemented in LearnDB
-* For each of the rules implemented below, follow these steps:
-  1. Add an outbound blank rule.
-  2. Add an appropriate title for the rule.
-  2. Set the "Pattern" field of the "Match" section to the value under "HTML Prior to rewrite".
-  3. Set the "Value" field of the "Action" section to the corresponding value under "HTML after rewrite".
-  4. Click `Apply` in the top right, in the "Action" section.
+## Overview
+The Query server combines [pgweb](https://github.com/sosedoff/pgweb/releases) 
+with a proxy web server. (The `README` in the root directory of this repo 
+provides an architectural overview of LearnDB.)
+
+The proxy is a web front-end and redirects incoming requests to pgweb. It then
+dynamically rewrites some of the content pgweb returns so that the end result 
+meets the requirements of LearnDB. The following is a list of the changes the 
+proxy makes to pgweb content:
+- Change the title of all pages
+- Change heading on login page
+- Reorder input boxes on login page
+- Add a "Change Password" link to login page
+- Add an "About" tab to the query page
+
+Presently, the proxy server uses the Internet Information Services (IIS) 
+and a couple of its extensions. However, the proxy could be any web server 
+that acts as front-end, redirects incoming requests to pagweb, and rewrites 
+pgweb content prior to returning a response to the client.
+
+__Note:__ The proxy also provides an opportunity to provide secure transport 
+(that is, support _https_).
   
-# Changes in HTML made by ARR Outbound Rules at runtime
-### Change the title and header of the page
-| HTML Prior to rewrite | HTML after rewrite |
-|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| `<title>pgweb</title>` | `<title>LearnDB</title>` |
-| `<h1>pgweb</h1>` | `<h2 style="text-align: center;text-shadow: 0px 1px 0px #fff;color: #999;font-weight: normal;">LearnDB</h2>` |
-| `<div class="version"></div>` | `<span class="header" style="font-size: 12px;  color: #aaa; display: flex; align-items: center; justify-content: center;">(Based on <a href="https://github.com/sosedoff/pgweb" target="_blank">&nbsp;pgweb&nbsp;</a><span class="version"></span>)</span>` |
-### Reorganize the input boxes on the homepage 
-| HTML Prior to rewrite | HTML after rewrite |
-|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| `<label class="col-sm-3 control-label">Username</label>` | `<label class="col-sm-3 control-label" name="labelDB">Database</label>` |
-| `<input type="text" id="pg_user" class="form-control" />` | `<input type="text" id="pg_db" name="inputDB" class="form-control" />` |
-| `<label class="col-sm-3 control-label">Password</label>` | `<label class="col-sm-3 control-label" name="labelUsr">Username</label>` |
-| `<input type="password" id="pg_password" class="form-control" />` | `<input type="text" id="pg_user" name="inputUsr" class="form-control" />` |
-| `<label class="col-sm-3 control-label">Database</label>` | `<label class="col-sm-3 control-label" name="labelPasswd">Password</label>` |
-| `<input type="text" id="pg_db" class="form-control" />` | `<input type="password" id="pg_password" name="inputPasswd" class="form-control" />` |
 
-### Add the "Change Password" link on the homepage 
-| HTML Prior to rewrite | HTML after rewrite |
-|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| `<button type="button" id="close_connection_window"  class="btn btn-block btn-default">Cancel</button>` | `<button type="button" id="close_connection_window" class="btn btn-block btn-default">Cancel</button></div><div style="text-align:center;" class="col-sm-12" name="divChangePasswd"><p class="help-block"><a href="http://localhost:5000">Change Password</a></p>` |
-### Add the "About" tab within the DB viewer of pgweb 
-| HTML Prior to rewrite | HTML after rewrite |
-|:-------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| `<li id="table_connection">Connection</li>` | `<li id="table_connection">Connection</li><li id="table_about" onclick="loadAbout();">About</li>` |
-| `</head>` | `<script type="text/javascript">function loadAbout() {UrlDecode:%7B}  $("#input").hide(); $("#body").addClass("full"); setCurrentTab("table_about"); document.getElementById("output").innerHTML = '<div class="wrapper"> <table id="results" class="table"><thead id="results_header"><th class="table-header-col" data-name="attribute">About</th><th class="table-header-col" data-name="value"></th></thead><tbody id="results_body"><tr><td data-col="0">LearnDB is a Graphical User Interface for interaction with PostgrSQL and ClassDB. The current implementaion depends on pgweb.</td></tr></tbody></div>';{UrlDecode:%7D}</script></head>` |
+## Installation
+1. Install pgweb. Use the `--sessions` command-line option so that multiple 
+   users/sessions are supported simultaneously. On Windows, it is better to 
+   run pgweb as a [service](https://github.com/DASSL/LearnDB/wiki/pgweb-as-a-service)
 
+2. Install IIS. A possibly-outdated [installation guide](https://github.com/DASSL/LearnDB/wiki/How-to-get-and-setup-a-free-SSL-certificate-for-Windows-Server-2016#add-iis-manager)
+   is available, but please consult the documentation for your version of 
+   Windows and IIS
+
+3. Install the IIS extension ["URL Rewrite 2"](https://www.iis.net/downloads/microsoft/url-rewrite)
+ 
+4. In the default site within IIS, configure the "URL Rewrite" item to forward 
+   incoming requests to pgweb. In the first text field under "Inbound Rules", 
+   enter the server and port where pgweb is listening. For example, if pgweb 
+   listens on port 1337 on the same machine, enter `localhost:1337`
+
+5. Install the IIS extension ["Application Request Routing"](https://www.iis.net/downloads/microsoft/application-request-routing)
+
+6. Import rewrite rules into IIS: Navigate to the `/src/pgweb_proxy` directory
+   and run the batch command `importRules.bat`
+
+The batch commands to import and export rules use [AppCmd]((https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj635852(v%3Dws.11))),
+a program distributed with IIS.
+
+See the `/docs` directory for details on importing and exporting rules, as well 
+as details of the actual rewrite rules.
