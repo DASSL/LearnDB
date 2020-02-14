@@ -10,7 +10,7 @@ The proxy is a web front-end and redirects incoming requests to pgweb. It then
 dynamically rewrites some of the content pgweb returns so that the end result 
 meets the requirements of LearnDB. 
 
-Presently, the proxy server uses the Internet Information Services (IIS) 
+Presently, the proxy server uses Microsoft Internet Information Services (IIS) 
 and a couple of its extensions. However, the proxy could be any web server 
 that acts as front-end, redirects incoming requests to pagweb, and rewrites 
 pgweb content prior to returning a response to the client.

@@ -32,7 +32,7 @@ operating system. The proxy server uses Microsoft Internet Information Server
 ## Installation
 
 The Query server and Change-Password server are installed and run separately. 
-See the `README` in directory `src\pgweb_proxy` for instructions to install 
+See the `README` in directory `src/pgweb_proxy` for instructions to install 
 the Query server.
 
 The Change-Password server is a Node.js Express web server (tested with 
@@ -58,7 +58,7 @@ different machine.
 LearnDB is developed at the Data Science & Systems Lab ([DASSL](http://dassl.github.io/), 
 read _dazzle_).
 
-LearDB was conceived by and is designed by [Sean Murthy](https://github.com/smurthys). 
+LearnDB was conceived by and is designed by [Sean Murthy](https://github.com/smurthys). 
 The following undergraduate students at [Western Connecticut State University](http://wcsu.edu/)
 contributed to the implementation:
 - [Kevin Kelly](https://github.com/KevinKelly25)

@@ -3,7 +3,7 @@ REM importRules.bat - LearnDB
 
 REM Adam Jeniski, Caleb Garrick
 
-REM CC 4.0 BY-NC-SA
+REM Licensed to other under CC 4.0 BY-NC-SA
 REM https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 REM Copyright (c) 2019- DASSL. ALL RIGHTS RESERVED.
