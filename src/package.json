@@ -1,16 +1,22 @@
 {
-  "name": "LearnDB",
+  "name": "learndb",
   "version": "0.0.1",
-  "description": "",
+  "description": "A web front-end to PostgreSQL databases",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "DASSL",
-  "license": "CC 4.0 BY-SA-NC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DASSL/LearnDB.git",
+    "private": true
+  },
+  "author": "Data Science & Systems Lab (DASSL)",
+  "license": "CC-BY-NC-4.0",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg-promise": "^9.0.3"
   }
 }

@@ -17,6 +17,7 @@
 
 const express = require('express');
 const router = express.Router();
+const dbConnectionCreator = require('../db/db.js');
 
 
 /**
@@ -29,18 +30,60 @@ const router = express.Router();
  * @param {string} username is the user's ID
  * @param {string} currentPassword is the user's current password to the database
  * @param {string} newPassword is the password user wants to switch to
+ * @param {string} confirmNewPassword is the password user wants to switch to
  */
 router.post('/change-password', (req, res) => {
-  if (req.body.username === "error") {
+  let host = (req.body.host + '').trim();
+  let port = (req.body.port + '').trim(); 
+  let database = (req.body.database + '').trim();
+  let username = (req.body.username + '').trim();
+  let currentPassword = (req.body.currentPassword + '').trim();
+  let newPassword = (req.body.newPassword + '').trim();
+  let confirmNewPassword = (req.body.confirmNewPassword + '').trim();
+
+  if (username.length < 1) {
     return res.status(500).json({
       status: "error",
-      message: "An error occurred"
+      message: "Username is required"
     }); 
   }
-  return res.status(200).json({
-    status: "success",
-    data: "Got to route successfully"
-  });
+
+  if (newPassword.length < 1) {
+    return res.status(500).json({
+      status: "error",
+      message: "New password is required"
+    }); 
+  }
+
+  if (newPassword !== confirmNewPassword) {
+    return res.status(500).json({
+      status: "error",
+      message: "The new password and its confirmation must match"
+    }); 
+  }
+
+  const db = dbConnectionCreator({username: username,
+                                  password: currentPassword,
+                                  host: host,
+                                  port: port,
+                                  database: database});
+  db.any(`ALTER USER ${username} WITH ENCRYPTED PASSWORD ` +
+         `'${newPassword}';`)
+    .then(() => {
+      return res.status(200).json({
+        status: "success",
+        data: "Password changed successfully"
+      }); 
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        status: "error",
+        message: "An error occurred"
+      }); 
+    })
+    .finally(() => {
+      db.$pool.end();// explicity close db connection
+    });
 });
 
 
